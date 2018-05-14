@@ -8,6 +8,6 @@
 
 module.exports.post_receive = async ctx => {
     console.log(ctx.request.body);
-    ctx.body = "1111";
+    ctx.body = "111221";
 };
 
