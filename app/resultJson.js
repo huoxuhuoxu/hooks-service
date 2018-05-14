@@ -1,11 +1,10 @@
 // 返回结果
 
-exports = {
+module.exports = {
     "succ": {
         errcode: 0,
         msg: "succ"
     }
-
 
 };
 
