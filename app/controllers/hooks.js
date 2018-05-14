@@ -5,10 +5,12 @@
  * 
  */
 
+const { succ } = require("../resultJson");
+
 
 module.exports.post_receive = async ctx => {
     console.log(ctx.request.body);
-    ctx.body = "111221";
+    ctx.body = succ;
 };
 
 
