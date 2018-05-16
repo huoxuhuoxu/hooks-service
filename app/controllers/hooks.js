@@ -21,7 +21,7 @@ module.exports.post_receive = async ctx => {
     if (dirlist.includes(warehourse)){
 
         const project_path = path.resolve(dir_path, warehourse);
-        
+
         console.log("[info] 切换项目路径 %s", project_path);
         process.chdir(project_path);
 
@@ -38,5 +38,7 @@ module.exports.post_receive = async ctx => {
     ctx.body = succ;
 
 };
+
+
 
 
