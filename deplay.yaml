@@ -1,0 +1,6 @@
+run:
+  - npm install --production --registry=https://registry.npm.taobao.org
+service:
+  - name: listening_hooks
+  
+
