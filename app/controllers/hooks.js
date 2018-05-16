@@ -29,10 +29,10 @@ module.exports.post_receive = async ctx => {
 
         const deploy = yaml.safeLoad(fs.readFileSync("deploy.yaml"));
         for (let cmd of deploy.run){
-            console.log(execSync(cmd));
+            console.log(execSync(cmd).toString());
         }
 
-        const service_name = deploy.service.name;
+        const service_name = deploy.service[0]["name"];
         if (execSync(`pm2 list | grep '${service_name}'`)){
             console.log(execSync(`pm2 restart ${service_name}`));
         } else {
