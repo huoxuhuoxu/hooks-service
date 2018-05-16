@@ -6,7 +6,7 @@
   "devDependencies": {},
   "scripts": {
     "dev": "nodemon index.js",
-    "pro": "pm2 start listening_hooks"
+    "pro": "pm2 start index.js --name listening_hooks"
   },
   "repository": {
     "type": "git",
