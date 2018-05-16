@@ -3,6 +3,6 @@ git_servicer:
   {
     ip: 120.26.94.5,
     username: git,
-    git_dir_path: /home/git/data/new_git
+    git_dir_path: data/new_git
   }
 
