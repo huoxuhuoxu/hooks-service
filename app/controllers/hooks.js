@@ -19,11 +19,11 @@ module.exports.post_receive = async ctx => {
 
     const dirlist = fs.readdirSync(dir_path);
 
-    const project_path = path.resolve(dir_path, warehourse);
-    console.log("[info] 切换项目路径 %s", project_path);
-    process.chdir(project_path);
-
     if (dirlist.includes(warehourse)){
+
+        const project_path = path.resolve(dir_path, warehourse);
+        console.log("[info] 切换项目路径 %s", project_path);
+        process.chdir(project_path);
 
         console.log(execSync("git pull").toString());
 
@@ -41,6 +41,9 @@ module.exports.post_receive = async ctx => {
         }
 
     } else {
+
+        console.log("[info] 切换项目路径 %s", dir_path);
+        process.chdir(dir_path);
 
         const { ip, username, git_dir_path } = git_servicer;
 
