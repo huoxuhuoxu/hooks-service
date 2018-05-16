@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> testing </title>
+</head>
+<body>
+    
+    <h1> testing </h1>
+
+    <script>
+    
+        (async () => {
+            const resTxt = await fetch("http://localhost:3034/testing", {
+                method: "put",
+                body: {}
+            });
+            console.log(resTxt);
+        })();
+        
+    </script>
+
+</body>
+</html>
