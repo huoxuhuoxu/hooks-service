@@ -14,16 +14,16 @@ const execSync = require("child_process").execSync;
 
 module.exports.post_receive = async ctx => {
 
-    const { dir_path } = yaml.safeLoad(fs.readFileSync("config.yaml"));
+    const { dir_path, git_servicer } = yaml.safeLoad(fs.readFileSync("config.yaml"));
     const { warehourse } = ctx.request.body;
 
     const dirlist = fs.readdirSync(dir_path);
+
+    const project_path = path.resolve(dir_path, warehourse);
+    console.log("[info] 切换项目路径 %s", project_path);
+    process.chdir(project_path);
+
     if (dirlist.includes(warehourse)){
-
-        const project_path = path.resolve(dir_path, warehourse);
-
-        console.log("[info] 切换项目路径 %s", project_path);
-        process.chdir(project_path);
 
         console.log(execSync("git pull").toString());
 
@@ -33,20 +33,23 @@ module.exports.post_receive = async ctx => {
         }
 
         const service_name = deploy.service[0]["name"];
-        ctx.body = succ;
+        
         if (execSync(`pm2 list | grep '${service_name}'`).toString()){
             console.log(execSync(`pm2 restart ${service_name}`));
-            // console.log("..", execSync(`pm2 list | grep '${service_name}'`).toString());
         } else {
             console.log(execSync(`pm2 start index.js --name ${service_name}`));
         }
 
-
     } else {
 
-        console.log("不存在需要拉取...");
+        const { ip, username, git_dir_path } = git_servicer;
+
+        console.log("[info] 开始拉取项目: %s", warehourse);
+        console.log(execSync(`git clone ${username}@${ip}:${git_dir_path}/${warehourse}.git`));
 
     }
+
+    ctx.body = succ;
 
 };
 
