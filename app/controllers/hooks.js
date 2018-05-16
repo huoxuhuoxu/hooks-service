@@ -33,11 +33,12 @@ module.exports.post_receive = async ctx => {
         }
 
         const service_name = deploy.service[0]["name"];
+        ctx.body = succ;
         if (execSync(`pm2 list | grep '${service_name}'`).toString()){
-            // console.log(execSync(`pm2 restart ${service_name}`));
-            console.log("..", execSync(`pm2 list | grep '${service_name}'`).toString());
+            console.log(execSync(`pm2 restart ${service_name}`));
+            // console.log("..", execSync(`pm2 list | grep '${service_name}'`).toString());
         } else {
-            // console.log(execSync(`pm2 start index.js --name ${service_name}`));
+            console.log(execSync(`pm2 start index.js --name ${service_name}`));
         }
 
 
@@ -48,7 +49,6 @@ module.exports.post_receive = async ctx => {
     }
 
 
-    ctx.body = succ;
 
 };
 
