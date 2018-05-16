@@ -27,6 +27,18 @@ module.exports.post_receive = async ctx => {
 
         console.log(execSync("git pull").toString());
 
+        const deploy = yaml.safeLoad(fs.readFileSync("deploy.yaml"));
+        for (let cmd of deploy.run){
+            console.log(execSync(cmd));
+        }
+
+        const service_name = deploy.service.name;
+        if (execSync(`pm2 list | grep '${service_name}'`)){
+            console.log(execSync(`pm2 restart ${service_name}`));
+        } else {
+            console.log(execSync(`pm2 start index.js --name ${service_name}`));
+        }
+
 
     } else {
 
