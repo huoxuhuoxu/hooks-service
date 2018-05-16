@@ -25,7 +25,7 @@ module.exports.post_receive = async ctx => {
         console.log("[info] 切换项目路径 %s", project_path);
         process.chdir(project_path);
 
-        console.log(execSync("git pull"));
+        console.log(execSync("git pull").toString());
 
 
     } else {
