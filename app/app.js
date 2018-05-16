@@ -5,7 +5,7 @@ const Koa = require("koa");
 const Router = require("koa-router");
 const bodyParser = require("koa-bodyparser");
 const logger = require("koa-logger");
-const static = require("koa-static");
+// const static = require("koa-static");
 
 const app = new Koa();
 const router = new Router();
@@ -21,7 +21,7 @@ app.use(bodyParser());
 
 
 // web page
-app.use(static(path.join(__dirname, "../public")));
+// app.use(static(path.join(__dirname, "../public")));
 
 // middleware
 app.use(async (ctx, next) => {
