@@ -110,6 +110,7 @@ const git_clone = (dir_path, warehourse, git_servicer) => {
 
 
 
+
 module.exports.post_receive = async ctx => {
 
     const { dir_path, git_servicer } = yaml.safeLoad(fs.readFileSync(path.resolve(__dirname, "../../config.yaml")));
