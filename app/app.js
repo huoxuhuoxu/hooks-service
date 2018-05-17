@@ -23,6 +23,7 @@ app.use(async (ctx, next) => {
     try {
         await next();
     } catch (err){
+        console.log("[info] 捕获了错误: ", err);
         if (err.status !== 200) return ctx.throw("Service Error");
         ctx.body = {
             errcode: 9000,
