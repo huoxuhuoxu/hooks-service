@@ -21,7 +21,7 @@
     }
 
 > /api/is-running
->> 由git-service - hooks: post-receive 调用，`心跳机制`，检测当前项目是否处于运行状态
+>> 由git-service - hooks: post-receive 调用，类似`心跳机制`，检测当前项目是否处于运行状态
 
 
 
