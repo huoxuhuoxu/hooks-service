@@ -15,16 +15,16 @@ const { info, error } = require("../lib/colors");
 // 启动/重启 服务
 const startup_project = (service_name) => {
 
-    const deploy_path = fs.readFileSync("deploy.yaml");
+    const deploy_path = "deploy.yaml";
 
     try {
         fs.accessSync(deploy_path);
     } catch (err){
-        return error("[warning] 不存在deploy.yaml部署文件，放弃自动化部署 ...");
+        return error("[warning] 不存在 %s 部署文件，放弃自动化部署 ...", deploy_path);
     }
 
     try{
-        const deploy = yaml.safeLoad(deploy_path);
+        const deploy = yaml.safeLoad(fs.readFileSync(deploy_path));
         for (let cmd of deploy.run){
             execSync(cmd);
         }
