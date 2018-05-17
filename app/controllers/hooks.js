@@ -1,7 +1,12 @@
 
 /**
  *  @readme
- *      处理由git仓库发起的hooks
+ *      post_receive:
+ *          处理由git仓库发起的hooks
+ * 
+ *      is_running: 
+ *          检测当前进程作为监控服务进程是否处于运行状态
+ * 
  * 
  *      存在一个问题：
  *          不存在项目，自动向git-service发起仓库拉起，第一次需要手动同意, 获取与远程主机的通信密钥...(应该可以手动写入known_hosts ... )
@@ -132,6 +137,11 @@ module.exports.post_receive = async ctx => {
 
     ctx.body = succ;
 
+};
+
+
+module.exports.is_running = async ctx => {
+    ctx.body = succ;
 };
 
 
