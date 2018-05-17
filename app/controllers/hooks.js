@@ -15,10 +15,11 @@ const { info, error } = require("../lib/colors");
 
 const mode_running = {
     pm2: (service_name, entrypoint) => {
-        if (execSync(`pm2 list | grep '${service_name}'`)){
-            execSync(`pm2 restart ${service_name}`)
-        } else {
-            execSync(`pm2 start ${entrypoint} --name ${service_name}`)
+        try {
+            execSync(`pm2 list | grep '${service_name}'`);
+            execSync(`pm2 restart ${service_name}`);
+        } catch (err){
+            execSync(`pm2 start ${entrypoint} --name ${service_name}`);
         }
     }
 };
