@@ -13,6 +13,16 @@ const { execSync, createError } = require("../lib/tools");
 const { info, error } = require("../lib/colors");
 
 
+const mode_running = {
+    pm2: (service_name) => {
+        if (execSync(`pm2 list | grep '${service_name}'`)){
+            execSync(`pm2 restart ${service_name}`)
+        } else {
+            execSync(`pm2 start index.js --name ${service_name}`)
+        }
+    }
+};
+
 // 启动/重启 服务
 const startup_project = (service_name) => {
 
@@ -32,19 +42,21 @@ const startup_project = (service_name) => {
             execSync(cmd);
         }
 
-        if ("service" in deploy && deploy["service"]["mode"] === "pm2") {
-            if (execSync(`pm2 list | grep '${service_name}'`)){
-                execSync(`pm2 restart ${service_name}`)
-            } else {
-                execSync(`pm2 start index.js --name ${service_name}`)
+        if ("service" in deploy) {
+
+            if (deploy["service"]["mode"] in mode_running){
+                return mode_running[deploy["service"]["mode"]](service_name);
             }
-            return ;
+            
+            const msg = `[warning] 不存在 ${deploy["service"]["mode"]} 部署方式，放弃自动化部署`;
+            error(msg);
+            throw createError(msg);
         }
 
         info("[info] 没有配置有效启动服务的方式，不启动服务");
 
     } catch (err){
-        throw createError(err);
+        throw createError(err.message || err.toString());
     }
 
 };
