@@ -23,7 +23,11 @@ app.use(async (ctx, next) => {
     try {
         await next();
     } catch (err){
-        ctx.throw("Service Error");
+        if (err.status !== 200) return ctx.throw("Service Error");
+        ctx.body = {
+            errcode: 9000,
+            msg: err.message
+        };
     }
 });
 

@@ -1,4 +1,7 @@
 run:
   - cnpm install --production
-  
+service: 
+  {
+    mode: pm2
+  }
 
