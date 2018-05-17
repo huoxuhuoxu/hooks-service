@@ -14,11 +14,11 @@ const { info, error } = require("../lib/colors");
 
 
 const mode_running = {
-    pm2: (service_name) => {
+    pm2: (service_name, entrypoint) => {
         if (execSync(`pm2 list | grep '${service_name}'`)){
             execSync(`pm2 restart ${service_name}`)
         } else {
-            execSync(`pm2 start index.js --name ${service_name}`)
+            execSync(`pm2 start ${entrypoint} --name ${service_name}`)
         }
     }
 };
@@ -42,12 +42,21 @@ const startup_project = (service_name) => {
             execSync(cmd);
         }
 
-        if ("service" in deploy) {
+        if ("service" in deploy && deploy["service"]["mode"] in mode_running) {
 
-            if (deploy["service"]["mode"] in mode_running){
-                return mode_running[deploy["service"]["mode"]](service_name);
-            }
+            const { mode, entrypoint } = deploy["service"];
             
+            if (!entrypoint){
+                const msg = `[warning] mode: ${mode} 缺少参数`;
+                error(msg);
+                throw createError(msg);
+            }
+
+            return mode_running[mode](service_name, entrypoint);
+            
+        }
+
+        if (deploy["service"] && deploy["service"]["mode"]){
             const msg = `[warning] 不存在 ${deploy["service"]["mode"]} 部署方式，放弃自动化部署`;
             error(msg);
             throw createError(msg);

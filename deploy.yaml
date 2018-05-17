@@ -2,6 +2,7 @@ run:
   - cnpm install --production
 service: 
   {
-    mode: pm2
+    mode: pm2,
+    entrypoint: index.js
   }
 
