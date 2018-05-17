@@ -3,6 +3,9 @@
  *  @readme
  *      处理由git仓库发起的hooks
  * 
+ *      存在一个问题：
+ *          不存在项目，自动向git-service发起仓库拉起，第一次需要手动同意, 获取与远程主机的通信密钥...(应该可以手动写入known_hosts ... )
+ * 
  */
 
 const fs = require("fs");
@@ -89,13 +92,17 @@ const git_pull = (dir_path, warehourse) => {
 // 创建项目
 const git_clone = (dir_path, warehourse, git_servicer) => {
 
-    info("[info] 切换项目路径 %s", dir_path);
+    info("[info] 切换至项目存放目录 %s", dir_path);
     process.chdir(dir_path);
 
     const { ip, username, git_dir_path } = git_servicer;
 
     info("[info] 开始拉取项目: %s", warehourse);
     execSync(`git clone ${username}@${ip}:${git_dir_path}/${warehourse}.git`);
+
+    const project_path = path.resolve(dir_path, warehourse); 
+    info("[info] 切换至项目目录 %s", project_path);
+    process.chdir(project_path);
 
     startup_project(warehourse);
 
