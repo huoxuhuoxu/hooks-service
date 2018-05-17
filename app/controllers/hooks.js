@@ -38,8 +38,11 @@ const startup_project = (service_name) => {
 
     try{
         const deploy = yaml.safeLoad(fs.readFileSync(deploy_path));
-        for (let cmd of deploy.run){
-            execSync(cmd);
+
+        if (deploy.run){
+            for (let cmd of deploy.run){
+                execSync(cmd);
+            }
         }
 
         if ("service" in deploy && deploy["service"]["mode"] in mode_running) {
