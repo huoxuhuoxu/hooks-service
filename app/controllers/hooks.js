@@ -45,7 +45,7 @@ const startup_project = (service_name) => {
         if ("service" in deploy && deploy["service"]["mode"] in mode_running) {
 
             const { mode, entrypoint } = deploy["service"];
-            
+
             if (!entrypoint){
                 const msg = `[warning] mode: ${mode} 缺少参数`;
                 error(msg);
@@ -96,6 +96,8 @@ const git_clone = (dir_path, warehourse, git_servicer) => {
     startup_project(warehourse);
 
 };
+
+
 
 
 module.exports.post_receive = async ctx => {
