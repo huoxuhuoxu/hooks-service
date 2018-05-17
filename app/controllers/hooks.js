@@ -16,7 +16,7 @@ const { info, error } = require("../lib/colors");
 // 启动/重启 服务
 const startup_project = (service_name) => {
 
-    const deploy_path = "deploy.yaml";
+    const deploy_path = "../../deploy.yaml";
 
     try {
         fs.accessSync(deploy_path);
