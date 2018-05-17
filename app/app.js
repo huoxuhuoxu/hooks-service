@@ -32,14 +32,14 @@ app.use(async (ctx, next) => {
 // app.use(static(path.join(__dirname, "../public")));
 
 // middleware
-app.use(async (ctx, next) => {
-    ctx.response.set({
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-    });
-    await next();
-});
+// app.use(async (ctx, next) => {
+//     ctx.response.set({
+//         "Access-Control-Allow-Origin": "*",
+//         "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+//         "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+//     });
+//     await next();
+// });
 
 
 // routes
