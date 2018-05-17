@@ -49,7 +49,7 @@ app.use(static(path.join(__dirname, "../public")));
 
 // routes
 router.post("/api/post-receive", hooks.post_receive);
-router.post("/api/is-running", async ctx => {ctx.body = "running";});
+router.get("/api/is-running", async ctx => {ctx.body = "running";});
 
 app.use(router.routes()).use(router.allowedMethods());
 
