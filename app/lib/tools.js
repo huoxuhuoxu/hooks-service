@@ -8,3 +8,9 @@ module.exports.execSync = (...args) => {
     return resul;
 };
 
+module.exports.createError = (msg = "", status = 200) => {
+    const error = new Error(msg);
+    error.status = status;  
+    return error;
+};
+

@@ -9,7 +9,7 @@ const fs = require("fs");
 const path = require("path");
 const { succ } = require("../resultJson");
 const yaml = require("js-yaml");
-const { execSync } = require("../lib/tools");
+const { execSync, createError } = require("../lib/tools");
 const { info, error } = require("../lib/colors");
 
 
@@ -22,7 +22,9 @@ const startup_project = (service_name) => {
     try {
         fs.accessSync(deploy_path);
     } catch (err){
-        return error("[warning] 不存在 %s 部署文件，放弃自动化部署 ...", deploy_path);
+        const msg = `[warning] 不存在部署文件: ${deploy_path}, 放弃自动化部署`;
+        error(msg);
+        throw createError(msg);
     }
 
     try{
@@ -43,9 +45,7 @@ const startup_project = (service_name) => {
         info("[info] 没有配置有效启动服务的方式，不启动服务");
 
     } catch (err){
-        const error = new Error(err);
-        error.status = 200;
-        throw error;
+        throw createError(err);
     }
 
 };
