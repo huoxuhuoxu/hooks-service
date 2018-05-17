@@ -1,6 +1,4 @@
 run:
   - cnpm install --production
-service:
-  - name: listening_hooks
   
 

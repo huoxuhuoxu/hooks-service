@@ -12,12 +12,20 @@ const router = new Router();
 
 const hooks = require("./controllers/hooks");
 
-
 app.use(logger((str, args) => {
     args.splice(2, 0, new Date());
     console.log(...args);
 }));
 app.use(bodyParser());
+
+// 错误捕获
+app.use(async (ctx, next) => {
+    try {
+        await next();
+    } catch (err){
+        ctx.throw("Service Error");
+    }
+});
 
 
 // web page
@@ -30,20 +38,16 @@ app.use(async (ctx, next) => {
         "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
         "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
     });
-    next();
+    await next();
 });
 
 
 // routes
 router.post("/api/post-receive", hooks.post_receive);
-router.put("/testing", async (ctx) => {
-    ctx.body = "111";
-});
-
 
 app.use(router.routes()).use(router.allowedMethods());
 
+
+
 module.exports = app;
-
-
 
