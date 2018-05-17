@@ -17,8 +17,8 @@ const fs = require("fs");
 const path = require("path");
 const { succ } = require("../resultJson");
 const yaml = require("js-yaml");
-const { execSync, createError } = require("../lib/tools");
-const { info, error } = require("../lib/colors");
+const { execSync, createError } = require("../libs/tools");
+const { info, error } = require("../libs/colors");
 
 
 const mode_running = {
