@@ -16,12 +16,13 @@
     
     Content-Type: application/json
     params: {
-        warehourse: string, 仓库名称, eg: "test"
-        branchs: array, push的分支, eg: [ "master", "debug" ]
+        warehourse: string, 仓库名称, e.g: "test"
+        branchs: array, push的分支, e.g: [ "master", "debug" ]
     }
 
 > /api/is-running
 >> 由git-service - hooks: post-receive 调用，类似`心跳机制`，检测当前项目是否处于运行状态
+
 
 
 
