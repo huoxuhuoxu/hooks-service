@@ -5,4 +5,3 @@ git_servicer:
     username: git,
     git_dir_path: data/new_git
   }
-
