@@ -1,7 +1,7 @@
-dir_path: /home/huoxu_huoxu/new_data
+dir_path: /home/www/product
 git_servicer:
   {
-    ip: 120.26.94.5,
+    ip: 120.45.56.7,
     username: git,
-    git_dir_path: data/new_git
+    git_dir_path: data/git_dir
   }
