@@ -8,10 +8,6 @@
     "dev": "nodemon index.js",
     "pro": "pm2 start index.js --name hooks-service"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@120.26.94.5:data/new_git/hooks-service.git"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
